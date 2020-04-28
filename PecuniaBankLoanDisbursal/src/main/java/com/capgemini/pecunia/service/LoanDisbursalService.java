@@ -9,6 +9,4 @@ public interface LoanDisbursalService {
 
 	public List<LoanDisbursal> getRejectedLoans();
 
-	public String updateBal(LoanDisbursal loandis);
-
 }

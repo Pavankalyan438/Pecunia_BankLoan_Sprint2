@@ -32,5 +32,11 @@ public class LoanReqControllerClass {
 	public ArrayList<LoanRequests> getAllRequests(){
 		return service.getAllRequests();
 	}
-
+	
+	
+	
+	@GetMapping("/getAllRejects")
+	public ArrayList<LoanRequests> getAllRejects(){
+		return service.getAllRejects();
+	}
 }

@@ -28,12 +28,6 @@ public class LoanDisbursalClass {
 	@Autowired
 	LoanDisbursalService service;
 
-	@GetMapping("/allrequests")
-	public ResponseEntity<LoanRequests[]> allRequests() {
-		ResponseEntity<LoanRequests[]> requests = rest.getForEntity("http://localhost:1000/loan/getAllRequests",
-				LoanRequests[].class);
-		return requests;
-	}
 	@GetMapping("/approvedrequests")
 	public List<LoanDisbursal> getApproveLoans() {
 		return service.getApproveLoans();
@@ -43,12 +37,5 @@ public class LoanDisbursalClass {
 	public List<LoanDisbursal> getRejectedLoans() {
 		return service.getRejectedLoans();
 	}
-	@PostMapping("/updateBal")
-	public ResponseEntity<String> updateBal(@RequestBody LoanDisbursal loandis) {
-		System.out.println(loandis);
-		String update= service.updateBal(loandis);
-		return new ResponseEntity<String>(update, new HttpHeaders(), HttpStatus.OK);
-	}
-	
 
 }

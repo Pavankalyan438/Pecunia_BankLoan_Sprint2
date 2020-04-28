@@ -78,33 +78,4 @@ public class LoanDisbursalServiceImp implements LoanDisbursalService {
 
 	}
 
-	
-	@SuppressWarnings("rawtypes")
-	@Override
-	public String updateBal(LoanDisbursal loandis) {
-		int id = loandis.getLoanId();
-		List<LoanDisbursal> l = dao.findThis(id);
-		Iterator iter = l.iterator();
-		while (iter.hasNext()) {
-
-			LoanDisbursal e = (LoanDisbursal) iter.next();
-			e.setLoanId(loandis.getLoanId());
-			e.setAccountId(loandis.getAccountId());
-			e.setCreditScore(loandis.getCreditScore());
-			e.setEmi(loandis.getEmi());
-			double amount = loandis.getLoanAmount() - loandis.getEmi();
-			amount=Math.round(amount*100)/100;
-			e.setLoanAmount(amount);
-			e.setLoanRoi(loandis.getLoanRoi());
-			e.setLoanStatus(loandis.getLoanStatus());
-			e.setLoanTenure(loandis.getLoanTenure() - 1);
-			e.setLoanType(loandis.getLoanType());
-			System.out.println(loandis);
-			dao.save(e);
-			
-
-		}
-		return "Emi for this " + loandis.getLoanTenure() + " month is paid";
-	}
-
 }

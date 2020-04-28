@@ -1,5 +1,6 @@
 package com.capgemini.pecunia.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,12 +9,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name="loanrequests")
 public class LoanRequests {
+	@Column(length=12)
 	private String accountId;
 	private double loanAmount;
 	private int loanTenure;
 	private int creditScore;
 	private double loanRoi;
+	@Column(length=50)
 	private String loanStatus;
+	@Column(length=50)
 	private String loanType;
 	@Id
 	@GeneratedValue

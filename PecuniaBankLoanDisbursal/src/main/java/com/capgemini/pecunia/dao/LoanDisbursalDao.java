@@ -17,9 +17,5 @@ public interface LoanDisbursalDao extends JpaRepository<LoanDisbursal, Integer> 
 	@Query("select r from LoanDisbursal r where loanStatus='accepted'")
 	List<LoanDisbursal> findAllAccepted();
 	@Query("select r from LoanDisbursal r where loanStatus='rejected'")
-	List<LoanDisbursal> findAllRejected();
-	@Query("select r from LoanDisbursal r where loanId=?1")
-	List<LoanDisbursal> findThis(Integer id);
-
-
+	List<LoanDisbursal> findAllRejected();	
 }

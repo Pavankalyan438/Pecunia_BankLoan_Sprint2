@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.capgemini.pecunia.dao.LoanRequestDao;
 import com.capgemini.pecunia.entity.AccountDetails;
 import com.capgemini.pecunia.entity.LoanRequests;
+import com.capgemini.pecunia.exception.BankAccountNotFound;
 
 @Service
 public class LoanRequestServiceImp implements LoanRequestService {
@@ -25,8 +26,9 @@ public class LoanRequestServiceImp implements LoanRequestService {
 
 			return "Your Loan Request with " + loanreq.getAccountId() + " accountid is successful";
 		} else {
-			return "No BankAccount found with " + loanreq.getAccountId()
-					+ "\n You need to have an Bank Account to applay Loan";
+			
+			throw new BankAccountNotFound("No BankAccount found with " + loanreq.getAccountId()
+					+ "\n You need to have an Bank Account to applay Loan");
 		}
 
 	}
@@ -35,5 +37,11 @@ public class LoanRequestServiceImp implements LoanRequestService {
 	public ArrayList<LoanRequests> getAllRequests() {
 		// TODO Auto-generated method stub
 		return (ArrayList<LoanRequests>) dao.findAll();
+	}
+
+	@Override
+	public ArrayList<LoanRequests> getAllRejects() {
+		// TODO Auto-generated method stub
+		return dao.getAllRejects();
 	}
 }

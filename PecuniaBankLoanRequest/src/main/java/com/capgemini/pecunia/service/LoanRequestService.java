@@ -10,4 +10,6 @@ public interface LoanRequestService {
 
 	public ArrayList<LoanRequests> getAllRequests();
 
+	public ArrayList<LoanRequests> getAllRejects();
+
 }
