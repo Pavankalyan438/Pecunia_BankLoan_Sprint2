@@ -28,6 +28,7 @@ public class LoanReqControllerClass {
 		String request = service.loanRequest(loanreq);
 		return new ResponseEntity<String>(request, new HttpHeaders(), HttpStatus.OK);
 	}
+	
 	@GetMapping("/getAllRequests")
 	public ArrayList<LoanRequests> getAllRequests(){
 		return service.getAllRequests();
