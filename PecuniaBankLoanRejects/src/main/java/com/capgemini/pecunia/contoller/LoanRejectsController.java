@@ -1,10 +1,8 @@
 package com.capgemini.pecunia.contoller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,14 +22,14 @@ public class LoanRejectsController {
 	RestTemplate rest;
 	@Autowired
 	LoanRejectsService service;
-	LoanRequests loanrequ=new LoanRequests();
-	
+	LoanRequests loanrequ = new LoanRequests();
+
 	@GetMapping("/allreqrejects")
 	public List<LoanDisbursal> allRejects() {
-		ResponseEntity<LoanRequests[]> requests=  rest.getForEntity("http://localhost:1000/loan/getAllRejects",
+		ResponseEntity<LoanRequests[]> requests = rest.getForEntity("http://localhost:1005/loan/getAllRequests",
 				LoanRequests[].class);
-	return service.loanRejects(requests);
 
-	
-	
-}}
+		return service.loanRejects(requests);
+
+	}
+}

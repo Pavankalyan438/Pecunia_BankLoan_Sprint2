@@ -11,5 +11,5 @@ public class PecuniaBankLoanApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PecuniaBankLoanApplication.class, args);
 	}
-
+	
 }

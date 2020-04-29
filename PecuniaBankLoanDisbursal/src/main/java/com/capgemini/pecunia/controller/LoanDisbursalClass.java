@@ -29,13 +29,12 @@ public class LoanDisbursalClass {
 	LoanDisbursalService service;
 
 	@GetMapping("/approvedrequests")
-	public List<LoanDisbursal> getApproveLoans() {
-		return service.getApproveLoans();
-	}
+	public List<LoanDisbursal> allRejects() {
+		ResponseEntity<LoanRequests[]> approves = rest.getForEntity("http://localhost:1005/loan/getAllRequests",
+				LoanRequests[].class);
 
-	@GetMapping("/rejectedrequests")
-	public List<LoanDisbursal> getRejectedLoans() {
-		return service.getRejectedLoans();
+		return service.getApproveLoans(approves);
+
 	}
 
 }

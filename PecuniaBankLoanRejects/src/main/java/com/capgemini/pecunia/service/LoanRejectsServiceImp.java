@@ -1,6 +1,5 @@
 package com.capgemini.pecunia.service;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +20,10 @@ public class LoanRejectsServiceImp implements LoanRejectsService {
 
 	@Override
 	public List<LoanDisbursal> loanRejects(ResponseEntity<LoanRequests[]> requests) {
-		@SuppressWarnings({ "unchecked", "rawtypes" })
-		Iterator iter = ((List<LoanRequests>) requests).iterator();
-		while (iter.hasNext()) {
-
-			LoanRequests l = (LoanRequests) iter.next();
-
+		LoanRequests[] body=requests.getBody();
+		for(int p=0;p<body.length;p++) {
+			LoanRequests l=body[p];
+			if(l.getCreditScore()<670) {
 			disburse.setAccountId(l.getAccountId());
 			disburse.setCreditScore(l.getCreditScore());
 			disburse.setLoanAmount(0);
@@ -37,8 +34,11 @@ public class LoanRejectsServiceImp implements LoanRejectsService {
 			disburse.setLoanType(l.getLoanType());
 			disburse.setEmi(0);
 			dao.save(disburse);
+			}else {
+				continue;
+			}
 		}
-		List<LoanDisbursal> i= dao.findAll();
+		List<LoanDisbursal> i= dao.findAllRejected();
 		 return i;
 	}
 

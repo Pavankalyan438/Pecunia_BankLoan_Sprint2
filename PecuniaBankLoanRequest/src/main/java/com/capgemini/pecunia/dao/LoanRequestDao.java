@@ -1,6 +1,5 @@
 package com.capgemini.pecunia.dao;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,8 +14,6 @@ public interface LoanRequestDao extends JpaRepository<LoanRequests, Integer>{
 	
 	@Query("select det from AccountDetails det where accountId=?1")
 	Optional<AccountDetails> findBank(@Param("c") String s1);
-	@Query("select r from LoanRequests r where creditScore<=670")
-	ArrayList<LoanRequests> getAllRejects();
 	
 
 }
