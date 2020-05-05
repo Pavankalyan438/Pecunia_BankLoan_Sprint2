@@ -19,12 +19,12 @@ public class LoanDisbursalServiceImp implements LoanDisbursalService {
 
 	@Override
 	public List<LoanDisbursal> getApproveLoans(ResponseEntity<LoanRequests[]> approves) {
-		// TODO Auto-generated method stub
+
 		LoanRequests[] body = approves.getBody();
 		for (int p = 0; p < body.length; p++) {
 			LoanRequests l = body[p];
-			if (l.getCreditScore() >= 670) {
-				if (!(dao.existsById(l.getLoanId()))) {
+			if ((l.getCreditScore() >= 670) && (!(dao.existsById(l.getLoanId()))) ) {
+				
 					disburse.setAccountId(l.getAccountId());
 					disburse.setCreditScore(l.getCreditScore());
 					disburse.setLoanAmount(l.getLoanAmount());
@@ -38,13 +38,9 @@ public class LoanDisbursalServiceImp implements LoanDisbursalService {
 					emi = Math.round(emi * 100) / 100;
 					disburse.setEmi(emi);
 					dao.save(disburse);
-				} else {
-					continue;
-				}
-			} else {
-				continue;
-			}
-		}
+				} 
+			} 
+		
 		return dao.findAllAccepted();
 
 	}

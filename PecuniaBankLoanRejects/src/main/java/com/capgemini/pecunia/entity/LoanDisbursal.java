@@ -71,6 +71,23 @@ public class LoanDisbursal {
 	public void setLoanId(int loanId) {
 		this.loanId = loanId;
 	}
+	
+	public LoanDisbursal(String accountId, double loanAmount, int loanTenure, int creditScore, double loanRoi,
+			String loanStatus, String loanType, double emi, int loanId) {
+		super();
+		this.accountId = accountId;
+		this.loanAmount = loanAmount;
+		this.loanTenure = loanTenure;
+		this.creditScore = creditScore;
+		this.loanRoi = loanRoi;
+		this.loanStatus = loanStatus;
+		this.loanType = loanType;
+		this.emi = emi;
+		this.loanId = loanId;
+	}
+	public LoanDisbursal() {
+		
+	}
 	@Override
 	public String toString() {
 		return "LoanDisbursal [accountId=" + accountId + ", loanAmount=" + loanAmount + ", loanTenure=" + loanTenure

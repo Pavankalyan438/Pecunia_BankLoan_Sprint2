@@ -13,7 +13,7 @@ public class GetAllRequestsServiceImp implements GetAllRequestsService{
 GetAllRequestsDao dao;
 	@Override
 	public ArrayList<LoanRequests> getAllRequests() {
-		// TODO Auto-generated method stub
+
 		return (ArrayList<LoanRequests>) dao.findAll();
 	}
 

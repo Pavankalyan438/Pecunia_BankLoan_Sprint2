@@ -80,7 +80,7 @@ public class LoanRequests {
 		this.loanId = loanId;
 	}
 	public LoanRequests() {
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	@Override

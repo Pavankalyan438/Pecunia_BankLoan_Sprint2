@@ -22,7 +22,7 @@ public class UpdateBalanceController {
 	
 	@PostMapping("/updateBal")
 	public ResponseEntity<String> updateBal(@RequestBody LoanDisbursal loandis) {
-		System.out.println(loandis);
+		
 		String update= service.updateBalance(loandis);
 		return new ResponseEntity<String>(update, new HttpHeaders(), HttpStatus.OK);
 	}

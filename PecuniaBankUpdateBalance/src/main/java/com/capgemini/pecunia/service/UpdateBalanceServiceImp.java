@@ -25,7 +25,7 @@ public class UpdateBalanceServiceImp implements UpdateBalanceService {
 			loandis.setLoanStatus(loandis.getLoanStatus());
 			loandis.setLoanTenure(loandis.getLoanTenure() - 1);
 			loandis.setLoanType(loandis.getLoanType());
-			System.out.println(loandis);
+			
 			dao.save(loandis);
 
 			return "This month Emi amount " + loandis.getEmi() + " of " + loandis.getAccountId() + " accoount for "

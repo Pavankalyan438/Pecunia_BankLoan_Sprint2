@@ -34,12 +34,10 @@ public class LoanRejectsServiceImp implements LoanRejectsService {
 			disburse.setLoanType(l.getLoanType());
 			disburse.setEmi(0);
 			dao.save(disburse);
-			}else {
-				continue;
 			}
 		}
-		List<LoanDisbursal> i= dao.findAllRejected();
-		 return i;
+		 return dao.findAllRejected();
+		
 	}
 
 }
