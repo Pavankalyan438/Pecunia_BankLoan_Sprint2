@@ -1,5 +1,6 @@
 package com.capgemini.pecunia.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -7,13 +8,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name="loandisbursal")
 public class LoanDisbursal {
+	@Column(length=12)
 	private String accountId;
+	@Column(length=12)
 	private double loanAmount;
+	@Column(length=12)
 	private int loanTenure;
+	@Column(length=12)
 	private int creditScore;
+	@Column(length=12)
 	private double loanRoi;
+	@Column(length=50)
 	private String loanStatus;
+	@Column(length=50)
 	private String loanType;
+	@Column(length=10)
 	private double emi;
 	@Id
 	private int loanId;
@@ -70,6 +79,23 @@ public class LoanDisbursal {
 	}
 	public void setLoanId(int loanId) {
 		this.loanId = loanId;
+	}
+	
+	public LoanDisbursal(String accountId, double loanAmount, int loanTenure, int creditScore, double loanRoi,
+			String loanStatus, String loanType, double emi, int loanId) {
+		super();
+		this.accountId = accountId;
+		this.loanAmount = loanAmount;
+		this.loanTenure = loanTenure;
+		this.creditScore = creditScore;
+		this.loanRoi = loanRoi;
+		this.loanStatus = loanStatus;
+		this.loanType = loanType;
+		this.emi = emi;
+		this.loanId = loanId;
+	}
+	public LoanDisbursal() {
+		
 	}
 	@Override
 	public String toString() {

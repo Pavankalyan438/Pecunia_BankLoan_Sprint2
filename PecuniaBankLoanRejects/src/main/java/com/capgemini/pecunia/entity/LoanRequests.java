@@ -12,9 +12,13 @@ import javax.persistence.Table;
 public class LoanRequests {
 	@Column(length=12)
 	private String accountId;
+	@Column(length=8)
 	private double loanAmount;
+	@Column(length=8)
 	private int loanTenure;
+	@Column(length=8)
 	private int creditScore;
+	@Column(length=10)
 	private double loanRoi;
 	@Column(length=50)
 	private String loanStatus;

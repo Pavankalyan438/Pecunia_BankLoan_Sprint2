@@ -1,8 +1,8 @@
 package com.capgemini.pecunia.contoller;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +15,8 @@ import com.capgemini.pecunia.entity.LoanDisbursal;
 import com.capgemini.pecunia.entity.LoanRequests;
 import com.capgemini.pecunia.service.LoanRejectsService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.sun.jersey.spi.inject.Errors.ErrorMessage;
+
 
 @RestController
 @RequestMapping("/loan")
@@ -39,18 +41,17 @@ public class LoanRejectsController {
 	}
 
 	@SuppressWarnings({ "unused", "unchecked" })
-	private List allRequFallback() {
-		List l=new ArrayList<>();
+	private String allRequFallback(Throwable t) {
+		 
+		/*List l=new ArrayList<>();
 		loandis.setAccountId("cant fetch");
 		loandis.setLoanStatus("cannot fetch");
 		loandis.setLoanType("cannot fetch");
 		
 		l.add(loandis);
-		return l;
-		/*List l=new ArrayList<>();
-		l.add("NO server is UP!");
-		return (ArrayList) l;
-*/
+		return l;*/
+		
+		return "NO server is UP!";
 	}
 
 }

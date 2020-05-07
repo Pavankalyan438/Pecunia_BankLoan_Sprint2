@@ -1,7 +1,6 @@
 package com.capgemini.pecunia;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,10 +21,14 @@ public class PecuniaBankUpdateBalanceApplicationTests {
 	UpdateBalanceDao dao;
 	@Test
 	public void updateBalanceTest() {
-		LoanDisbursal loandis=new LoanDisbursal();
-		when(dao.save(loandis)).thenReturn(loandis);
-		assertEquals(loandis,dao.save(loandis));
+		String expected="Sufficient Account Balance is not found to pay EMI, deposit money in your account to pay month emi";
+		
+		LoanDisbursal loandis=new LoanDisbursal("111111111111", 100, 5, 988, 6, "accepted", "study", 150, 55);
+	
+		
+		assertEquals(expected,service.updateBalance(loandis));
 	}
+	
 	}
 
 

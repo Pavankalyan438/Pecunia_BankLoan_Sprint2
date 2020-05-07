@@ -23,7 +23,7 @@ public class LoanRequestServiceImp implements LoanRequestService {
 		if (details.isPresent()) {
 			dao.save(loanreq);
 
-			return "Your Loan Request with " + loanreq.getAccountId() + " accountid is successful";
+			return "Your Loan Request is successful";
 		} else {
 
 			throw new BankAccountNotFound("No BankAccount found with " + loanreq.getAccountId()

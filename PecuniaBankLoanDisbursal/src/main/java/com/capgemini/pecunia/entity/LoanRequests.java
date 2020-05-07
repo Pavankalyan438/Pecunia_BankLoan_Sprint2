@@ -9,16 +9,20 @@ import javax.persistence.Table;
 @Entity
 @Table(name="loanrequests")
 public class LoanRequests {
-	@Column(length=12)
-	private String accountId;
-	private double loanAmount;
-	private int loanTenure;
-	private int creditScore;
-	private double loanRoi;
-	@Column(length=50)
-	private String loanStatus;
-	@Column(length=50)
-	private String loanType;
+		@Column(length=12)
+		private String accountId;
+		@Column(length=8)
+		private double loanAmount;
+		@Column(length=8)
+		private int loanTenure;
+		@Column(length=8)
+		private int creditScore;
+		@Column(length=10)
+		private double loanRoi;
+		@Column(length=50)
+		private String loanStatus;
+		@Column(length=50)
+		private String loanType;
 	@Id
 	@GeneratedValue
 	private int loanId;
@@ -69,6 +73,22 @@ public class LoanRequests {
 	}
 	public void setLoanId(int loanId) {
 		this.loanId = loanId;
+	}
+	
+	public LoanRequests(String accountId, double loanAmount, int loanTenure, int creditScore, double loanRoi,
+			String loanStatus, String loanType, int loanId) {
+		super();
+		this.accountId = accountId;
+		this.loanAmount = loanAmount;
+		this.loanTenure = loanTenure;
+		this.creditScore = creditScore;
+		this.loanRoi = loanRoi;
+		this.loanStatus = loanStatus;
+		this.loanType = loanType;
+		this.loanId = loanId;
+	}
+	public LoanRequests() {
+		
 	}
 	@Override
 	public String toString() {

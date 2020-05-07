@@ -1,6 +1,6 @@
 package com.capgemini.pecunia.controller;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +25,13 @@ public class LoanDisbursalClass {
 	LoanDisbursalService service;
 
 	@GetMapping("/approvedrequests")
-	public List<LoanDisbursal> allRejects() {
+	public ArrayList<LoanDisbursal> allApproved() {
 		ResponseEntity<LoanRequests[]> approves = rest.getForEntity("http://localhost:1005/loan/getAllRequests",
 				LoanRequests[].class);
 
-		return service.getApproveLoans(approves);
+		return (ArrayList<LoanDisbursal>) service.getApproveLoans(approves);
 
 	}
+	
 
 }
