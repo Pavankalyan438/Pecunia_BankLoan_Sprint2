@@ -1,8 +1,7 @@
 package com.capgemini.pecunia.contoller;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,8 +13,6 @@ import org.springframework.web.client.RestTemplate;
 import com.capgemini.pecunia.entity.LoanDisbursal;
 import com.capgemini.pecunia.entity.LoanRequests;
 import com.capgemini.pecunia.service.LoanRejectsService;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.sun.jersey.spi.inject.Errors.ErrorMessage;
 
 
 @RestController
@@ -30,28 +27,15 @@ public class LoanRejectsController {
 	LoanRequests loanrequ = new LoanRequests();
 	LoanDisbursal loandis = new LoanDisbursal();
 
-	@HystrixCommand(fallbackMethod = "allRequFallback")
 	@GetMapping("/allreqrejects")
-	public List allRejects() {
+	public ArrayList<LoanDisbursal> allRejects() {
 		ResponseEntity<LoanRequests[]> requests = rest.getForEntity("http://localhost:1005/loan/getAllRequests",
 				LoanRequests[].class);
 
-		return service.loanRejects(requests);
+		return (ArrayList<LoanDisbursal>) service.loanRejects(requests);
 
 	}
 
-	@SuppressWarnings({ "unused", "unchecked" })
-	private String allRequFallback(Throwable t) {
-		 
-		/*List l=new ArrayList<>();
-		loandis.setAccountId("cant fetch");
-		loandis.setLoanStatus("cannot fetch");
-		loandis.setLoanType("cannot fetch");
-		
-		l.add(loandis);
-		return l;*/
-		
-		return "NO server is UP!";
-	}
+	
 
 }

@@ -19,13 +19,19 @@ public class PecuniaBankUpdateBalanceApplicationTests {
 	UpdateBalanceService service;
 	@MockBean
 	UpdateBalanceDao dao;
+	String expected="Sufficient Account Balance is not found to pay EMI, deposit money in your account to pay month emi";
+	
 	@Test
 	public void updateBalanceTest() {
-		String expected="Sufficient Account Balance is not found to pay EMI, deposit money in your account to pay month emi";
 		
-		LoanDisbursal loandis=new LoanDisbursal("111111111111", 100, 5, 988, 6, "accepted", "study", 150, 55);
-	
+		LoanDisbursal loandis=new LoanDisbursal("111111111111", 100, 5, 988, 6, "accepted", "study", 150, 55);		
+		assertEquals(expected,service.updateBalance(loandis));
+	}
+
+	@Test
+	public void updateBalanceTestFail() {
 		
+		LoanDisbursal loandis=new LoanDisbursal("111111111111", 1000, 5, 988, 6, "accepted", "study", 150, 55);		
 		assertEquals(expected,service.updateBalance(loandis));
 	}
 	

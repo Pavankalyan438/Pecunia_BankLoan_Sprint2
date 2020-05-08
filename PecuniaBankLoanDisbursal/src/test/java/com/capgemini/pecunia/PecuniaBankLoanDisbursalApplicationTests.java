@@ -1,5 +1,6 @@
 package com.capgemini.pecunia;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.URI;
@@ -41,6 +42,7 @@ public class PecuniaBankLoanDisbursalApplicationTests {
 		assertEquals(1, dao.findAllAccepted().size());
 
 	}
+	
 	@Test
 	public void allApprovedTest1() throws URISyntaxException {
 		RestTemplate restTemplate = new RestTemplate();
