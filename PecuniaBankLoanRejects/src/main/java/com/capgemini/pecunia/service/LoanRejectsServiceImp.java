@@ -29,7 +29,7 @@ public class LoanRejectsServiceImp implements LoanRejectsService {
 			disburse.setLoanAmount(0);
 			disburse.setLoanId(l.getLoanId());
 			disburse.setLoanRoi(l.getLoanRoi());
-			disburse.setLoanStatus("rejected");
+			disburse.setLoanStatus("Rejected");
 			disburse.setLoanTenure(l.getLoanTenure());
 			disburse.setLoanType(l.getLoanType());
 			disburse.setEmi(0);

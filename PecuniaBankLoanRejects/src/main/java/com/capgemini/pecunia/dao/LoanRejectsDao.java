@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.capgemini.pecunia.entity.LoanDisbursal;
 @Repository
 public interface LoanRejectsDao extends JpaRepository<LoanDisbursal, Integer> {
-	@Query("select r from LoanDisbursal r where loanStatus='rejected'")
+	@Query("select r from LoanDisbursal r where loanStatus='Rejected'")
 	List<LoanDisbursal> findAllRejected();
 
 }

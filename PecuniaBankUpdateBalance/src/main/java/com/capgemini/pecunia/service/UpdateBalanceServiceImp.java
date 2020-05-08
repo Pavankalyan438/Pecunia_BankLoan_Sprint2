@@ -1,15 +1,26 @@
 package com.capgemini.pecunia.service;
 
+import java.sql.Date;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capgemini.pecunia.dao.TransactionsDao;
 import com.capgemini.pecunia.dao.UpdateBalanceDao;
 import com.capgemini.pecunia.entity.LoanDisbursal;
+import com.capgemini.pecunia.entity.Transactions;
 
 @Service
 public class UpdateBalanceServiceImp implements UpdateBalanceService {
 	@Autowired
 	UpdateBalanceDao dao;
+	@Autowired
+	private TransactionsDao transac;
+Transactions transaction=new Transactions();
+Random rand = new Random();
+	long millis=System.currentTimeMillis();  
+	Date date=new Date(millis); 
 
 	@Override
 	public String updateBalance(LoanDisbursal loandis) {
@@ -25,6 +36,16 @@ public class UpdateBalanceServiceImp implements UpdateBalanceService {
 			loandis.setLoanStatus(loandis.getLoanStatus());
 			loandis.setLoanTenure(loandis.getLoanTenure() - 1);
 			loandis.setLoanType(loandis.getLoanType());
+			
+			
+			transaction.setAccountId(loandis.getAccountId());
+			transaction.setTransAmount(loandis.getEmi());
+			transaction.setTransDate(date);
+			transaction.setTransFrom(loandis.getAccountId());
+			transaction.setTransId(rand.nextInt(1000));
+			transaction.setTransTo("pecunia bank");
+			transaction.setTransType("EMI");
+			transac.save(transaction);
 			
 			dao.save(loandis);
 

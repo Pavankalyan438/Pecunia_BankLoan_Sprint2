@@ -30,7 +30,7 @@ public class LoanDisbursalServiceImp implements LoanDisbursalService {
 					disburse.setLoanAmount(l.getLoanAmount());
 					disburse.setLoanId(l.getLoanId());
 					disburse.setLoanRoi(l.getLoanRoi());
-					disburse.setLoanStatus("accepted");
+					disburse.setLoanStatus("Accepted");
 					disburse.setLoanTenure(l.getLoanTenure());
 					disburse.setLoanType(l.getLoanType());
 					double interest = (l.getLoanAmount() * l.getLoanTenure() * l.getLoanRoi() / (100 * 12));
@@ -40,7 +40,7 @@ public class LoanDisbursalServiceImp implements LoanDisbursalService {
 					dao.save(disburse);
 				} 
 			} 
-		
+		System.out.println(dao.findAllAccepted());
 		return dao.findAllAccepted();
 
 	}
