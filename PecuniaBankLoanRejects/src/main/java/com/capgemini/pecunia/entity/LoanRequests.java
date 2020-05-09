@@ -75,6 +75,21 @@ public class LoanRequests {
 	public void setLoanId(int loanId) {
 		this.loanId = loanId;
 	}
+	public LoanRequests(String accountId, double loanAmount, int loanTenure, int creditScore, double loanRoi,
+			String loanStatus, String loanType, int loanId) {
+		super();
+		this.accountId = accountId;
+		this.loanAmount = loanAmount;
+		this.loanTenure = loanTenure;
+		this.creditScore = creditScore;
+		this.loanRoi = loanRoi;
+		this.loanStatus = loanStatus;
+		this.loanType = loanType;
+		this.loanId = loanId;
+	}
+	public LoanRequests() {
+		
+	}
 	@Override
 	public String toString() {
 		return "LoanRequests [accountId=" + accountId + ", loanAmount=" + loanAmount + ", loanTenure=" + loanTenure

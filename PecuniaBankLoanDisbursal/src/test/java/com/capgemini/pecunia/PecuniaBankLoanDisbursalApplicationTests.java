@@ -1,5 +1,6 @@
 package com.capgemini.pecunia;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.URI;
@@ -13,7 +14,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -21,16 +21,14 @@ import org.springframework.web.client.RestTemplate;
 
 import com.capgemini.pecunia.dao.LoanDisbursalDao;
 import com.capgemini.pecunia.entity.LoanDisbursal;
-import com.capgemini.pecunia.service.LoanDisbursalService;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class PecuniaBankLoanDisbursalApplicationTests {
 	@SuppressWarnings("unused")
 	@Autowired
-	private LoanDisbursalService service;
-	@MockBean
 	private LoanDisbursalDao dao;
+
 
 	@Test
 	public void allApprovedTest() {
@@ -51,5 +49,9 @@ public class PecuniaBankLoanDisbursalApplicationTests {
 		URI uri = new URI(baseUrl);
 		ResponseEntity<ArrayList> result = restTemplate.exchange(uri, HttpMethod.GET, null, ArrayList.class);
 		assertEquals(200, result.getStatusCodeValue());
+	}
+	@Test
+	public void rejectsTest() {
+		assertNotEquals(5, dao.findAllAccepted().size());
 	}
 }
