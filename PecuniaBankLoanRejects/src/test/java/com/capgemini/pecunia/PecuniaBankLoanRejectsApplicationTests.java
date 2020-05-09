@@ -6,8 +6,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import javax.persistence.Entity;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +20,7 @@ public class PecuniaBankLoanRejectsApplicationTests {
 
 	
 	@Test
+	@SuppressWarnings("rawtypes")
 	public void allRejectsTestFail() throws URISyntaxException {
 		RestTemplate restTemplate = new RestTemplate();
 		final String baseUrl = "http://localhost:1003/loan/allreqrejects";
@@ -30,10 +29,11 @@ public class PecuniaBankLoanRejectsApplicationTests {
 		assertEquals(500, result.getStatusCodeValue());
 	}
 	@Test
+	@SuppressWarnings("rawtypes")
 	public void allRejectsTestPass() throws URISyntaxException {
 		RestTemplate restTemplate = new RestTemplate();
 		final String baseUrl = "http://localhost:1003/loan/allreqrejects";
-		URI uri = new URI(baseUrl);
+		URI uri = new URI(baseUrl);		
 		ResponseEntity<List> result = restTemplate.exchange(uri, HttpMethod.GET, null, List.class);
 		assertEquals(200, result.getStatusCodeValue());
 	}

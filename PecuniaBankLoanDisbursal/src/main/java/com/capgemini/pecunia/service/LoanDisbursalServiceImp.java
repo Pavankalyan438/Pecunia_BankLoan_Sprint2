@@ -40,7 +40,7 @@ public class LoanDisbursalServiceImp implements LoanDisbursalService {
 					dao.save(disburse);
 				} 
 			} 
-		System.out.println(dao.findAllAccepted());
+		
 		return dao.findAllAccepted();
 
 	}

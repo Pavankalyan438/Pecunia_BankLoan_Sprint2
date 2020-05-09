@@ -25,32 +25,28 @@ import com.capgemini.pecunia.service.GetAllRequestsService;
 public class PecuniaBankgetAllLoansApplicationTests {
 	@Autowired
 	private GetAllRequestsService service;
-	//@MockBean
+	
 	@Autowired
 	private GetAllRequestsDao dao;
 
 	@Test
 	public void getAllRequestsTest() {
-		/*Mockito.when(dao.findAll())
-				.thenReturn(Stream.of(new LoanRequests("111111111111", 10000, 18, 899, 8, "pending", "study", 3))
-						.collect(Collectors.toList()));
-		assertEquals(1, service.getAllRequests().size());*/
 		assertNotNull(dao.findAll());
-		//assertEquals(2,  service.getAllRequests().size());
-
 	}
+
 	@Test
 	public void getAllRequestsTest2() {
-		
-		assertNotEquals(5,service.getAllRequests().size());
+
+		assertNotEquals(5, service.getAllRequests().size());
 	}
+
 	@SuppressWarnings("rawtypes")
 	@Test
 	public void allRequestsTestUrl() throws URISyntaxException {
 		RestTemplate restTemplate = new RestTemplate();
 		final String baseUrl = "http://localhost:1005/loan/getAllRequests";
 		URI uri = new URI(baseUrl);
-	
+
 		ResponseEntity<List> result = restTemplate.exchange(uri, HttpMethod.GET, null, List.class);
 		assertEquals(200, result.getStatusCodeValue());
 	}

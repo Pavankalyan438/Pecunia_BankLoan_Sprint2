@@ -6,8 +6,10 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capgemini.pecunia.dao.AccountDao;
 import com.capgemini.pecunia.dao.TransactionsDao;
 import com.capgemini.pecunia.dao.UpdateBalanceDao;
+import com.capgemini.pecunia.entity.AccountDetails;
 import com.capgemini.pecunia.entity.LoanDisbursal;
 import com.capgemini.pecunia.entity.Transactions;
 
@@ -17,14 +19,18 @@ public class UpdateBalanceServiceImp implements UpdateBalanceService {
 	UpdateBalanceDao dao;
 	@Autowired
 	private TransactionsDao transac;
-Transactions transaction=new Transactions();
-Random rand = new Random();
-	long millis=System.currentTimeMillis();  
-	Date date=new Date(millis); 
+	@Autowired
+	private AccountDao account;
+
+	AccountDetails accountDetails = new AccountDetails();
+	Transactions transaction = new Transactions();
+	Random rand = new Random();
+	long millis = System.currentTimeMillis();
+	Date date = new Date(millis);
 
 	@Override
 	public String updateBalance(LoanDisbursal loandis) {
-		if ((loandis.getLoanAmount() - loandis.getEmi()) > 0) {
+		if (((loandis.getLoanAmount() - loandis.getEmi()) > 0)) {
 			loandis.setLoanId(loandis.getLoanId());
 			loandis.setAccountId(loandis.getAccountId());
 			loandis.setCreditScore(loandis.getCreditScore());
@@ -36,8 +42,7 @@ Random rand = new Random();
 			loandis.setLoanStatus(loandis.getLoanStatus());
 			loandis.setLoanTenure(loandis.getLoanTenure() - 1);
 			loandis.setLoanType(loandis.getLoanType());
-			
-			
+
 			transaction.setAccountId(loandis.getAccountId());
 			transaction.setTransAmount(loandis.getEmi());
 			transaction.setTransDate(date);
@@ -46,7 +51,11 @@ Random rand = new Random();
 			transaction.setTransTo("pecunia bank");
 			transaction.setTransType("EMI");
 			transac.save(transaction);
-			
+
+			AccountDetails details = account.selectById(loandis.getAccountId());
+			details.setAmount(details.getAmount() - loandis.getEmi());
+			account.save(details);
+
 			dao.save(loandis);
 
 			return "This month Emi amount " + loandis.getEmi() + " of " + loandis.getAccountId() + " accoount for "
