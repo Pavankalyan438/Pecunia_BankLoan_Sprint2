@@ -15,7 +15,6 @@ import com.capgemini.pecunia.entity.LoanRequests;
 import com.capgemini.pecunia.service.LoanRejectsService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
-
 @RestController
 @RequestMapping("/loan")
 @CrossOrigin("http://localhost:4200")
@@ -28,21 +27,27 @@ public class LoanRejectsController {
 	LoanRequests loanrequ = new LoanRequests();
 	LoanDisbursal loandis = new LoanDisbursal();
 
+	// this method uses restTemplate to take the input from the another microservice
+	// and passes them to the service layer
 	@GetMapping("/allreqrejects")
-	@HystrixCommand(fallbackMethod="allRejectsFallback")
+	@HystrixCommand(fallbackMethod = "allRejectsFallback")
 	public ArrayList<LoanDisbursal> allRejects() {
-	ResponseEntity<LoanRequests[]> requests = rest.getForEntity("http://localhost:1005/loan/getAllRequests",
+		ResponseEntity<LoanRequests[]> requests = rest.getForEntity("http://localhost:1005/loan/getAllRequests",
 				LoanRequests[].class);
 
 		return (ArrayList<LoanDisbursal>) service.loanRejects(requests);
 
 	}
+
+	// fallback method for the allRejects method, when ever the main microservice
+	// used with restTemplate is down in order to stop the inflow of requsts we use
+	// fallback method
 	@SuppressWarnings("unused")
 	private ArrayList<LoanDisbursal> allRejectsFallback() {
-		LoanDisbursal loandis=new LoanDisbursal("SERVER disDOWN",0 , 0, 0, 0, "SERVER DOWN", "SERVER DOWN", 0, 0);
-				ArrayList<LoanDisbursal> al= new ArrayList<>();
+		LoanDisbursal loandis = new LoanDisbursal("SERVER disDOWN", 0, 0, 0, 0, "SERVER DOWN", "SERVER DOWN", 0, 0);
+		ArrayList<LoanDisbursal> al = new ArrayList<>();
 		al.add(loandis);
 		return al;
-		
+
 	}
 }

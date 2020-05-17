@@ -25,6 +25,8 @@ public class LoanDisbursalClass {
 	@Autowired
 	LoanDisbursalService service;
 
+	// this method uses restTemplate to take the input from the another microservice
+	// and passes them to the service layer
 	@GetMapping("/approvedrequests")
 	@HystrixCommand(fallbackMethod = "allApprovedsFallback")
 	public ArrayList<LoanDisbursal> allApproved() {
@@ -35,6 +37,9 @@ public class LoanDisbursalClass {
 
 	}
 
+	// fallback method for the allApproved method, when ever the main microservice
+	// used with restTemplate is down in order to stop the inflow of requsts we use
+	// fallback method
 	@SuppressWarnings("unused")
 	private ArrayList<LoanDisbursal> allApprovedsFallback() {
 		LoanDisbursal loandis = new LoanDisbursal("SERVER DOWN", 0, 0, 0, 0, "SERVER DOWN", "SERVER DOWN", 0, 0);

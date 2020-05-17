@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
+//this specifies the class as an entity and mapped to the relation database
 @Table(name="loanrequests")
 public class LoanRequests {
 	@Column(length=12)

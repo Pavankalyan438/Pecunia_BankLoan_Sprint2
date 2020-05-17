@@ -16,28 +16,29 @@ public class LoanRejectsServiceImp implements LoanRejectsService {
 	@Autowired
 	LoanRejectsDao dao;
 	LoanDisbursal disburse = new LoanDisbursal();
-	
 
+	// method used to check the credit score and add that into the table by changing
+	// the loan status
 	@Override
 	public List<LoanDisbursal> loanRejects(ResponseEntity<LoanRequests[]> requests) {
-		LoanRequests[] body=requests.getBody();
-		for(int p=0;p<body.length;p++) {
-			LoanRequests l=body[p];
-			if(l.getCreditScore()<670) {
-			disburse.setAccountId(l.getAccountId());
-			disburse.setCreditScore(l.getCreditScore());
-			disburse.setLoanAmount(0);
-			disburse.setLoanId(l.getLoanId());
-			disburse.setLoanRoi(l.getLoanRoi());
-			disburse.setLoanStatus("Rejected");
-			disburse.setLoanTenure(l.getLoanTenure());
-			disburse.setLoanType(l.getLoanType());
-			disburse.setEmi(0);
-			dao.save(disburse);
+		LoanRequests[] body = requests.getBody();
+		for (int p = 0; p < body.length; p++) {
+			LoanRequests l = body[p];
+			if (l.getCreditScore() < 670) {
+				disburse.setAccountId(l.getAccountId());
+				disburse.setCreditScore(l.getCreditScore());
+				disburse.setLoanAmount(0);
+				disburse.setLoanId(l.getLoanId());
+				disburse.setLoanRoi(l.getLoanRoi());
+				disburse.setLoanStatus("Rejected");
+				disburse.setLoanTenure(l.getLoanTenure());
+				disburse.setLoanType(l.getLoanType());
+				disburse.setEmi(0);
+				dao.save(disburse);
 			}
 		}
-		 return dao.findAllRejected();
-		
+		return dao.findAllRejected();
+
 	}
 
 }

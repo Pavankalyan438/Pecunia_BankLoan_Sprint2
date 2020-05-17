@@ -11,6 +11,11 @@ import com.capgemini.pecunia.entity.LoanRequests;
 public class GetAllRequestsServiceImp implements GetAllRequestsService{
 @Autowired
 GetAllRequestsDao dao;
+
+
+
+// method used to display all the loan requests that employee have added into
+// requests data base, it gives Arraylist as the return type
 	@Override
 	public ArrayList<LoanRequests> getAllRequests() {
 

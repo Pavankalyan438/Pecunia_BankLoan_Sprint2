@@ -20,10 +20,16 @@ public class LoanReqControllerClass {
 	@Autowired
 	LoanRequestService service;
 
+	// this method is used to request a loan, this takes the loan request object as
+	// the input, checks whether the object is  null and then passes to service layer
 	@PostMapping("/request")
-	public ResponseEntity<String> loanRequest(@RequestBody LoanRequests loanreq) {
-		String request = service.loanRequest(loanreq);
-		return new ResponseEntity<String>(request, new HttpHeaders(), HttpStatus.OK);
+	public ResponseEntity<String> loanRequest(@RequestBody LoanRequests loanreq) throws Exception {
+		if (loanreq == null) {
+			throw new RuntimeException("object is null");
+		} else {
+			String request = service.loanRequest(loanreq);
+			return new ResponseEntity<String>(request, new HttpHeaders(), HttpStatus.OK);
+		}
 	}
 
 }

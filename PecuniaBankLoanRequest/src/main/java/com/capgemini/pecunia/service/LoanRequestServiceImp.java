@@ -17,6 +17,9 @@ public class LoanRequestServiceImp implements LoanRequestService {
 	LoanRequestDao dao;
 	@Autowired
 	AccountDao account;
+
+	// this method puts a request in the database if he is the customer, else throws
+	// an exception which is handled globally
 	@Override
 	public String loanRequest(LoanRequests loanreq) {
 		String s1 = loanreq.getAccountId();

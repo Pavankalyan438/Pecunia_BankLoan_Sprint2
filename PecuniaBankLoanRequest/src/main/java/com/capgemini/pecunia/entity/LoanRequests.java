@@ -6,75 +6,92 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//this is used to make a class as entity so that it can mapped to the relational database
 @Entity
-@Table(name="loanrequests")
+@Table(name = "loanrequests")
 public class LoanRequests {
-	@Column(length=12)
+	@Column(length = 12)
 	private String accountId;
-	@Column(length=8)
+	@Column(length = 8)
 	private double loanAmount;
-	@Column(length=8)
+	@Column(length = 8)
 	private int loanTenure;
-	@Column(length=8)
+	@Column(length = 8)
 	private int creditScore;
-	@Column(length=10)
+	@Column(length = 10)
 	private double loanRoi;
-	@Column(length=50)
+	@Column(length = 50)
 	private String loanStatus;
-	@Column(length=50)
+	@Column(length = 50)
 	private String loanType;
 	@Id
 	@GeneratedValue
 	private int loanId;
+
 	public String getAccountId() {
 		return accountId;
 	}
+
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
+
 	public double getLoanAmount() {
 		return loanAmount;
 	}
+
 	public void setLoanAmount(double loanAmount) {
 		this.loanAmount = loanAmount;
 	}
+
 	public int getLoanTenure() {
 		return loanTenure;
 	}
+
 	public void setLoanTenure(int loanTenure) {
 		this.loanTenure = loanTenure;
 	}
+
 	public int getCreditScore() {
 		return creditScore;
 	}
+
 	public void setCreditScore(int creditScore) {
 		this.creditScore = creditScore;
 	}
+
 	public double getLoanRoi() {
 		return loanRoi;
 	}
+
 	public void setLoanRoi(double loanRoi) {
 		this.loanRoi = loanRoi;
 	}
+
 	public String getLoanStatus() {
 		return loanStatus;
 	}
+
 	public void setLoanStatus(String loanStatus) {
 		this.loanStatus = loanStatus;
 	}
+
 	public String getLoanType() {
 		return loanType;
 	}
+
 	public void setLoanType(String loanType) {
 		this.loanType = loanType;
 	}
+
 	public int getLoanId() {
 		return loanId;
 	}
+
 	public void setLoanId(int loanId) {
 		this.loanId = loanId;
 	}
-	
+
 	public LoanRequests(String accountId, double loanAmount, int loanTenure, int creditScore, double loanRoi,
 			String loanStatus, String loanType, int loanId) {
 		super();
@@ -87,16 +104,16 @@ public class LoanRequests {
 		this.loanType = loanType;
 		this.loanId = loanId;
 	}
+
 	public LoanRequests() {
-		
+
 	}
-	
+
 	@Override
 	public String toString() {
 		return "LoanRequests [accountId=" + accountId + ", loanAmount=" + loanAmount + ", loanTenure=" + loanTenure
 				+ ", creditScore=" + creditScore + ", loanRoi=" + loanRoi + ", loanStatus=" + loanStatus + ", loanType="
 				+ loanType + ", loanId=" + loanId + "]";
 	}
-	
 
 }

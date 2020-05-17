@@ -7,58 +7,50 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-//this is used to make a class as entity so that it can mapped to the relational database
 @Entity
-@Table(name = "Account")
+@Table(name="Account")
 public class AccountDetails {
-	@Id
-	@Column(length = 12)
+	@Id  
+	@Column(length=12) 
 	private String accountId;
-	@Column(length = 15)
+	@Column(length=15)
 	private String branch;
-	@Column(length = 15)
+	@Column(length=15)
 	private String accountType;
-	@Column(length = 8)
+	@Column(length=8)
 	private Double amount;
 	@Column(length = 20)
 	private Date lastUpdated;
-
+	
+	
+	
 	public Date getLastUpdated() {
 		return lastUpdated;
 	}
-
 	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
-
 	public String getAccountId() {
 		return accountId;
 	}
-
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
-
 	public String getBranch() {
 		return branch;
 	}
-
 	public void setBranch(String branch) {
 		this.branch = branch;
 	}
-
 	public String getAccountType() {
 		return accountType;
 	}
-
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
-
 	public Double getAmount() {
 		return amount;
 	}
-
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}

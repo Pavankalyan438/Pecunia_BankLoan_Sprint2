@@ -22,21 +22,25 @@ public class UpdateBalanceServiceImp implements UpdateBalanceService {
 	@Autowired
 	private AccountDao account;
 
-	AccountDetails accountDetails = new AccountDetails();
-	Transactions transaction = new Transactions();
+	private Transactions transaction = new Transactions();
 	Random rand = new Random();
 	long millis = System.currentTimeMillis();
 	Date date = new Date(millis);
 
+	// this method is used to pay the emi, it takes the loan disbursal as the input
+	// and checks the tenure condition and then cuts the emi or shows a message if
+	// condition fails
 	@Override
 	public String updateBalance(LoanDisbursal loandis) {
-		if (((loandis.getLoanAmount() - loandis.getEmi()) > 0)) {
+
+		if ((loandis.getLoanTenure() > 0)) {
 			loandis.setLoanId(loandis.getLoanId());
 			loandis.setAccountId(loandis.getAccountId());
 			loandis.setCreditScore(loandis.getCreditScore());
 			loandis.setEmi(loandis.getEmi());
+
 			double amount = loandis.getLoanAmount() - loandis.getEmi();
-			amount = Math.round(amount * 100) / 100;
+
 			loandis.setLoanAmount(amount);
 			loandis.setLoanRoi(loandis.getLoanRoi());
 			loandis.setLoanStatus(loandis.getLoanStatus());
@@ -48,21 +52,19 @@ public class UpdateBalanceServiceImp implements UpdateBalanceService {
 			transaction.setTransDate(date);
 			transaction.setTransFrom(loandis.getAccountId());
 			transaction.setTransId(rand.nextInt(1000));
-			transaction.setTransTo("pecunia bank");
+			transaction.setTransTo("Pecunia Bank");
 			transaction.setTransType("EMI");
 			transac.save(transaction);
-
 			AccountDetails details = account.selectById(loandis.getAccountId());
 			details.setAmount(details.getAmount() - loandis.getEmi());
 			account.save(details);
 
 			dao.save(loandis);
+			return loandis.getLoanType() + " EMI Rs/- " + loandis.getEmi() + " from " + loandis.getAccountId()
+					+ " account is paid!! ";
 
-			return "This month Emi amount " + loandis.getEmi() + " of " + loandis.getAccountId() + " accoount for "
-					+ loandis.getLoanType() + " is paid" + " due loan is "
-					+ (loandis.getLoanTenure() * loandis.getEmi());
 		} else {
-			return "Sufficient Account Balance is not found to pay EMI, deposit money in your account to pay month emi";
+			return "Due Loan has been cleared!!";
 		}
 	}
 

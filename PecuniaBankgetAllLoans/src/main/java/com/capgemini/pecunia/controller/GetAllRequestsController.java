@@ -16,16 +16,19 @@ import com.capgemini.pecunia.service.GetAllRequestsService;
 
 @RestController
 @RequestMapping("/loan")
+// cross origin is a security concept that puts restrictions to the web
+// applications, it prevents JS to produce or consume requests
 @CrossOrigin("http://localhost:4200")
 public class GetAllRequestsController {
 	@Autowired
 	GetAllRequestsService service;
-	
+
+	// method used to display all the loan requests that employee have added into
+	// requests data base, it gives list as the return type
 	@GetMapping("/getAllRequests")
-	public ResponseEntity<List<LoanRequests>> getAllRequests(){
-	ArrayList<LoanRequests> requests=service.getAllRequests();
-		return new ResponseEntity<List<LoanRequests>>(requests,HttpStatus.OK);
+	public ResponseEntity<List<LoanRequests>> getAllRequests() {
+		ArrayList<LoanRequests> requests = service.getAllRequests();
+		return new ResponseEntity<List<LoanRequests>>(requests, HttpStatus.OK);
 	}
-	
-	
+
 }
